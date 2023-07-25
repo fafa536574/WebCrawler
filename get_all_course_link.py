@@ -10,12 +10,12 @@ CHROMEDRIVER_PATH = r'C:\Users\User\我的雲端硬碟FA\資料區_Cloud\Python_
 Urls_Path = 'C:/Users/User/我的雲端硬碟FA/資料區_Cloud/Python_FA/WebCrawler/DomainPage/'
 select_value = '5'  # 下拉選項值，試作先設為5
 
-def get_links(domain, url):
+def get_links(domain, domainurl):
     # 創建一個新的 Chrome 瀏覽器實例
     driver = webdriver.Chrome(executable_path  =CHROMEDRIVER_PATH)
 
     # 載入該網頁
-    driver.get(url)
+    driver.get(domainurl)
 
     # 找到下拉式選單元素
     select_element = driver.find_element(By.ID,'ddlPageSize')
@@ -52,7 +52,6 @@ def get_links(domain, url):
     #for href, title in zip(hrefs, titles):
     #    print(f'href: {href}, title: {title}')
 
-
     #移動到目錄
     os.chdir(Urls_Path)
 
@@ -66,12 +65,12 @@ def get_links(domain, url):
     return titles, hrefs
 
 
-def get_nextpage_links(domain, url):
+def get_nextpage_links(domain, domainurl):
     # 創建一個新的 Chrome 瀏覽器實例
     driver = webdriver.Chrome(executable_path  =CHROMEDRIVER_PATH)
 
     # 載入該網頁
-    driver.get(url)
+    driver.get(domainurl)
 
     # 找到下拉式選單元素
     select_element = driver.find_element(By.ID,'ddlPageSize')

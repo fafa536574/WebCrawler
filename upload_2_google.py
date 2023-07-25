@@ -1,10 +1,11 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
+
 JSON_FILE_PATH = r'C:\Users\User\我的雲端硬碟FA\資料區_Cloud\Python_FA\WebCrawler\forwebcrawler-712156a63a57.json'
 
 #
-def write_columeABC(domain, titles, hrefs):
+def write_columeABC(AllCourseData_transposed):
     # 使用的API
     scope = ['https://spreadsheets.google.com/feeds',
             'https://www.googleapis.com/auth/drive']
@@ -16,7 +17,10 @@ def write_columeABC(domain, titles, hrefs):
     # 開啟試算表並取得第一張工作表
     worksheet = gc.open('AllCourseData').sheet1
 
+    # 使用 gspread 更新 Google Sheets
+    worksheet.update('A2', AllCourseData_transposed)
 
+    """" 
     # 陣列資料
     data = [
         {'domain': 'example1.com', 'title': 'Example 1', 'url': 'http://example1.com'},
@@ -28,7 +32,7 @@ def write_columeABC(domain, titles, hrefs):
 
     # 一次性写入所有数据。注意 'A2' 是起始单元格的地址。
     worksheet.update('A2', data_as_list)
-    """" 
+
     # 陣列資料
     data = [1, 2, 3, 4, 5]
 

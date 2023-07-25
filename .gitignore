@@ -1,2 +1,3 @@
-DMs
-DomainPage
+*.pyc
+/DMs
+/DomainPage

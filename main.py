@@ -1,5 +1,6 @@
 import get_all_course_link
 import get_dm_content
+import upload_2_google
 
 
 def main():
@@ -15,6 +16,7 @@ def main():
 
     for domain, url in zip(domains, urls):
         titles, hrefs = get_all_course_link.get_links(domain,url)
+        upload_2_google.write_columeABC(domain, titles, hrefs)
         get_dm_content.func(titles, hrefs)
         
         #智慧機械1頁超過100個，故需要跳下一頁

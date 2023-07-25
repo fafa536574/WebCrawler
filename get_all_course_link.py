@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import os
 
 CHROMEDRIVER_PATH = r'C:\Users\User\我的雲端硬碟FA\資料區_Cloud\Python_FA\WebCrawler\chromedriver.exe'
+#存檔的path
 Urls_Path = 'C:/Users/User/我的雲端硬碟FA/資料區_Cloud/Python_FA/WebCrawler/DomainPage/'
 select_value = '5'  # 下拉選項值，試作先設為5
 

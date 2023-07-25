@@ -2,6 +2,7 @@ import requests
 import os
 from bs4 import BeautifulSoup
 
+#存檔的path
 DMs_Path = 'C:/Users/User/我的雲端硬碟FA/資料區_Cloud/Python_FA/WebCrawler/DMs/'
 
 def func(titles, hrefs):

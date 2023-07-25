@@ -17,6 +17,7 @@ def main():
         titles, hrefs = get_all_course_link.get_links(domain,url)
         get_dm_content.func(titles, hrefs)
         
+        #智慧機械1頁超過100個，故需要跳下一頁
         if domain == 'SMA智慧機械' :
             titles, hrefs = get_all_course_link.get_nextpage_links(domain,url)
             get_dm_content.func(titles, hrefs)

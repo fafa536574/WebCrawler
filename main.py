@@ -2,6 +2,7 @@ import get_all_course_link
 import get_dm_content
 import upload_2_google
 
+AllCourseData = []
 
 def main():
 

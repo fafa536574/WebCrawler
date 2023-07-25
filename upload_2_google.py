@@ -3,6 +3,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 JSON_FILE_PATH = r'C:\Users\User\我的雲端硬碟FA\資料區_Cloud\Python_FA\WebCrawler\forwebcrawler-712156a63a57.json'
 
+#
 def write_columeABC(domain, titles, hrefs):
     # 使用的API
     scope = ['https://spreadsheets.google.com/feeds',
@@ -15,8 +16,24 @@ def write_columeABC(domain, titles, hrefs):
     # 開啟試算表並取得第一張工作表
     worksheet = gc.open('AllCourseData').sheet1
 
+
+    # 陣列資料
+    data = [
+        {'domain': 'example1.com', 'title': 'Example 1', 'url': 'http://example1.com'},
+        {'domain': 'example2.com', 'title': 'Example 2', 'url': 'http://example2.com'},
+        # 等等...
+    ]
+    # 将数据转换为一个二维列表。
+    data_as_list = [[entry['domain'], entry['title'], entry['url']] for entry in data]
+
+    # 一次性写入所有数据。注意 'A2' 是起始单元格的地址。
+    worksheet.update('A2', data_as_list)
+    """" 
     # 陣列資料
     data = [1, 2, 3, 4, 5]
 
-    # 將資料寫入 Google Sheets
-    worksheet.append_row(data)
+    # 将数据插入 Google Sheets 的第二行
+    worksheet.insert_row(data, 2)
+   """""
+
+

@@ -5,7 +5,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 JSON_FILE_PATH = r'C:\Users\User\我的雲端硬碟FA\資料區_Cloud\Python_FA\WebCrawler\forwebcrawler-712156a63a57.json'
 
 #
-def write_columeABC(AllCourseData_transposed):
+def func(AllCourseData_transposed):
     # 使用的API
     scope = ['https://spreadsheets.google.com/feeds',
             'https://www.googleapis.com/auth/drive']

@@ -11,11 +11,24 @@ def func(titles, hrefs):
     #for href, title in zip(hrefs, titles):
     #    print(f'href: {href}, title: {title}')
 
+
+
+    course_names = []
+    ActAttributes = []
+    ActLocations = []
+    Durations = []
+    ActBeginDates = []
+    ActEndDates = []
+    ContectCnames = []
+    ContectTels = []
+    ForeSignUpEndDates = []
+    divConBoxs = []
+
     #針對各個課程去撈DM內容
     for title, href in zip(titles, hrefs):
 
-        part_titles = []
-        part_contents = []
+        divConBox_titles = []
+        divConBox_contents = []
 
         # 進行網頁請求
         response = requests.get(href)
@@ -27,47 +40,59 @@ def func(titles, hrefs):
         # 抓出課程名稱
         course_name = soup.find('h2', {'id': 'h3Title'}).text
         course_name = course_name[:-15]
+        course_names.append(course_name)
 
         # 抓出課程型態
         ActAttribute = soup.find('span', {'id': 'spanActAttribute'}).text
+        ActAttributes.append(ActAttribute)
 
         # 抓出課程地址
         ActLocation = soup.find('span', {'id': 'spanActLocation'}).text
+        ActLocations.append(ActLocation)
 
         # 抓出課程時數
         Duration = soup.find('span', {'id': 'spanDuration'}).text
+        Durations.append(Duration)
 
         # 抓出課程起日期
         ActBeginDate = soup.find('span', {'id': 'spanActBeginDate'}).text
+        ActBeginDates.append(ActBeginDate)
 
         # 抓出課程訖日期
         ActEndDate = soup.find('span', {'id': 'spanActEndDate'}).text
+        ActEndDates.append(ActEndDate)
 
         # 抓出聯絡人
         ContectCname = soup.find('span', {'id': 'spanContectCname'}).text
+        ContectCnames.append(ContectCname)
 
         # 抓出連絡電話
         ContectTel = soup.find('span', {'id': 'spanContectTel'}).text
+        ContectTels.append(ContectTel)
 
         # 抓出報名截止日
         ForeSignUpEndDate = soup.find('span', {'id': 'spanForeSignUpEndDate'}).text
+        ForeSignUpEndDates.append(ForeSignUpEndDate)
 
 
         # 尋找 分段標題 和 分段內容
-        all_part_title = soup.find_all('h3', {'class': 'title'})
-        all_part_content = soup.find_all('div', {'id': 'divConBox'})
+        divConBox_title_all = soup.find_all('h3', {'class': 'title'})
+        divConBox_content_all = soup.find_all('div', {'id': 'divConBox'})
 
-        for i in all_part_title:
-            part_titles.append(i.text.strip())
 
-        for j in all_part_content:
-            part_contents.append(j.text.strip())
 
-        # DEBUG用-印出所有的part_title和part_content
-        #for k, l in zip(part_titles, part_contents):
-        #    print("part_title:" + k)
-        #    print("part_content:" + l)
-        
+        for i in divConBox_title_all:
+            divConBox_titles.append(i.text.strip() + '\n')
+
+        for j in divConBox_content_all:
+            divConBox_contents.append(j.text.strip() + '\n')
+
+        combined = list(zip(divConBox_titles, divConBox_contents))
+        combined_strings = [f"{divConBox_title} {divConBox_content}" for divConBox_title, divConBox_content in combined]
+        # 将列表中的所有元素连接成一个字符串，每个元素之间由换行符分隔
+        text = '\n'.join(combined_strings)
+        divConBoxs.append(text)
+
         #移動到目錄
         os.chdir(DMs_Path)
 
@@ -89,7 +114,7 @@ def func(titles, hrefs):
             f.write('連絡電話：' + ContectTel + '\n')
             f.write('報名截止日：' + ForeSignUpEndDate + '\n')    
 
-            for k, l in zip(part_titles, part_contents):
+            for k, l in zip(divConBox_titles, divConBox_contents):
                 try:
                     # 將 part title 和 part content 寫入檔案
                     f.write('\n' + '分段標題：' + k + '\n')
@@ -98,6 +123,11 @@ def func(titles, hrefs):
                     # 寫入錯誤訊息
                     f.write(error_message)
 
-""""""
+
+    return course_names, ActAttributes, ActLocations, Durations, ActBeginDates, ActEndDates, ContectCnames, ContectTels, ForeSignUpEndDates, divConBoxs
+
+
+
+
 
 

@@ -99,8 +99,9 @@ def get_nextpage_links(domain, domainurl):
     divs = soup.find_all('div', class_='text-wrap')
 
     # 儲存所有的 href 和 title
+    domains = []
+    titles = []    
     hrefs = []
-    titles = []
 
     for div in divs:
         # 找到每個 div 中的 a 標籤
@@ -109,6 +110,7 @@ def get_nextpage_links(domain, domainurl):
         # 將 href 和 title 加到相對應的列表中
         hrefs.append(a['href'])
         titles.append(a['title'])
+        domains.append(domain)
 
     #移動到目錄
     os.chdir(Urls_Path)
@@ -119,4 +121,4 @@ def get_nextpage_links(domain, domainurl):
 
     # 關閉瀏覽器視窗
     driver.quit()
-    return titles, hrefs
+    return domains, titles, hrefs

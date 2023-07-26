@@ -20,19 +20,21 @@ def main():
 
     for domain, domainurl in zip(domain_text, domainurls):
         domains, titles, hrefs = get_all_course_link.get_links(domain,domainurl)
+        course_names, ActAttributes, ActLocations, Durations, ActBeginDates, ActEndDates, ContectCnames, ContectTels, ForeSignUpEndDates, divConBoxs = get_dm_content.func(titles, hrefs)
 
         # 創建 AllCourseData 二維陣列，並將 hrefs 和 titles 放入對應的列中
-        AllCourseData = [domains, titles, hrefs]
-        #print(AllCourseData)
+        AllCourseData = [domains, titles, hrefs, course_names, ActAttributes, ActLocations, Durations, ActBeginDates, ActEndDates, ContectCnames, ContectTels, ForeSignUpEndDates, divConBoxs]
+
+
         # 如果你想要將 AllCourseData 的行和列轉置，可以使用 zip 函數
         AllCourseData_transposed = list(map(list, zip(*AllCourseData)))
 
         upload_2_google.func(AllCourseData_transposed)
-        #get_dm_content.func(titles, hrefs)
+
         
         #智慧機械1頁超過100個，故需要跳下一頁
         if domain == 'SMA智慧機械' :
-            titles, hrefs = get_all_course_link.get_nextpage_links(domain,domainurl)
+            domains, titles, hrefs = get_all_course_link.get_nextpage_links(domain,domainurl)
             get_dm_content.func(titles, hrefs)
 
 

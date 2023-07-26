@@ -17,27 +17,20 @@ def func(AllCourseData_transposed):
     # 開啟試算表並取得第一張工作表
     worksheet = gc.open('AllCourseData').sheet1
 
+    # Fetch all records
+    records = worksheet.get_all_records()
+
+    # Count the records. Since it's a list of dictionaries, each dictionary corresponds to a row
+    row_count = len(records)
+
+    # 盤出來的資料開始為第0列，標題為第1列，因此實際差了2列
+    next_row = row_count + 2
+
+    # 构造A1记法的范围字符串，例如 "A11"
+    range_str = "A" + str(next_row)
+
     # 使用 gspread 更新 Google Sheets
-    worksheet.update('A2', AllCourseData_transposed)
+    worksheet.update(range_str, AllCourseData_transposed)
 
-    """" 
-    # 陣列資料
-    data = [
-        {'domain': 'example1.com', 'title': 'Example 1', 'url': 'http://example1.com'},
-        {'domain': 'example2.com', 'title': 'Example 2', 'url': 'http://example2.com'},
-        # 等等...
-    ]
-    # 将数据转换为一个二维列表。
-    data_as_list = [[entry['domain'], entry['title'], entry['url']] for entry in data]
-
-    # 一次性写入所有数据。注意 'A2' 是起始单元格的地址。
-    worksheet.update('A2', data_as_list)
-
-    # 陣列資料
-    data = [1, 2, 3, 4, 5]
-
-    # 将数据插入 Google Sheets 的第二行
-    worksheet.insert_row(data, 2)
-   """""
 
 

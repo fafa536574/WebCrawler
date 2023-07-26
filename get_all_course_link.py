@@ -51,20 +51,18 @@ def get_links(domain, domainurl):
         titles.append(a['title'])
         domains.append(domain)
 
-    # 打印出所有的 href 和 title
-    #for href, title in zip(hrefs, titles):
-    #    print(f'href: {href}, title: {title}')
-
+    """""DEBUG用，輸出html檔確認
     #移動到目錄
     os.chdir(Urls_Path)
 
     #存成html檔
     with open(domain +'.html', 'w', encoding='utf-8') as f:
         f.write(html)
-
+    """""
 
     # 關閉瀏覽器視窗
     driver.quit()
+
     return domains, titles, hrefs
 
 
@@ -112,13 +110,16 @@ def get_nextpage_links(domain, domainurl):
         titles.append(a['title'])
         domains.append(domain)
 
+    """""DEBUG用，輸出html檔確認
     #移動到目錄
     os.chdir(Urls_Path)
 
     #存成html檔
     with open(domain + '_nextpage.html', 'w', encoding='utf-8') as f:
         f.write(html)
+    """""
 
     # 關閉瀏覽器視窗
     driver.quit()
+
     return domains, titles, hrefs

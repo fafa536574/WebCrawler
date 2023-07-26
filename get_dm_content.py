@@ -7,12 +7,6 @@ DMs_Path = 'C:/Users/User/我的雲端硬碟FA/資料區_Cloud/Python_FA/WebCraw
 
 def func(titles, hrefs):
     
-    # DEBUG用-打印出所有的 href 和 title
-    #for href, title in zip(hrefs, titles):
-    #    print(f'href: {href}, title: {title}')
-
-
-
     course_names = []
     ActAttributes = []
     ActLocations = []
@@ -80,7 +74,6 @@ def func(titles, hrefs):
         divConBox_content_all = soup.find_all('div', {'id': 'divConBox'})
 
 
-
         for i in divConBox_title_all:
             divConBox_titles.append(i.text.strip() + '\n')
 
@@ -93,6 +86,8 @@ def func(titles, hrefs):
         text = '\n'.join(combined_strings)
         divConBoxs.append(text)
 
+
+        """""DEBUG用，輸出txt檔確認
         #移動到目錄
         os.chdir(DMs_Path)
 
@@ -122,6 +117,7 @@ def func(titles, hrefs):
                 except IndexError:
                     # 寫入錯誤訊息
                     f.write(error_message)
+        """""
 
 
     return course_names, ActAttributes, ActLocations, Durations, ActBeginDates, ActEndDates, ContectCnames, ContectTels, ForeSignUpEndDates, divConBoxs

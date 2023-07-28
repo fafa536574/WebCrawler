@@ -12,7 +12,7 @@ select_value = '5'  # 下拉選項值，試作先設為5
 
 def get_links(domain, domainurl):
     # 創建一個新的 Chrome 瀏覽器實例
-    driver = webdriver.Chrome(executable_path  =CHROMEDRIVER_PATH)
+    driver = webdriver.Chrome(executable_path = CHROMEDRIVER_PATH)
 
     # 載入該網頁
     driver.get(domainurl)

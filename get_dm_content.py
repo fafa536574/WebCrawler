@@ -1,6 +1,8 @@
 import requests
 import os
 from bs4 import BeautifulSoup
+import json
+
 
 #存檔的path
 DMs_Path = 'C:/Users/User/我的雲端硬碟FA/資料區_Cloud/Python_FA/WebCrawler/DMs/'
@@ -17,6 +19,8 @@ def func(titles, hrefs):
     ContectTels = []
     ForeSignUpEndDates = []
     divConBoxs = []
+    descriptions = []
+    keywords = []
 
     #針對各個課程去撈DM內容
     for title, href in zip(titles, hrefs):
@@ -87,6 +91,21 @@ def func(titles, hrefs):
         divConBoxs.append(text)
 
 
+        # 課程簡要
+        description = soup.find('meta', attrs={'property': 'description'})
+        if description:
+            descriptions.append(description.get('content'))
+        else:
+            descriptions.append(None)
+
+        # 課程關鍵字
+        keyword = soup.find('meta', attrs={'property': 'keyword'})
+        if keyword:
+            keywords.append(keyword.get('content'))
+        else:
+            keywords.append(None)
+
+
         """""DEBUG用，輸出txt檔確認
         #移動到目錄
         os.chdir(DMs_Path)
@@ -120,7 +139,7 @@ def func(titles, hrefs):
         """""
 
 
-    return course_names, ActAttributes, ActLocations, Durations, ActBeginDates, ActEndDates, ContectCnames, ContectTels, ForeSignUpEndDates, divConBoxs
+    return course_names, ActAttributes, ActLocations, Durations, ActBeginDates, ActEndDates, ContectCnames, ContectTels, ForeSignUpEndDates, divConBoxs, descriptions, keywords
 
 
 
